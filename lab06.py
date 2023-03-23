@@ -20,8 +20,10 @@ def decoder(password):
     result = ""
     for i in password:
         val = int(i)
-        if (val - 3) < 0:
+        if (val - 3) <= 0:
             val = (val + 10) - 3
+        else:
+            val = val-3
         result = result + str(val)
     return result
 
@@ -34,16 +36,22 @@ def print_menu():
     print("2. Decode")
     print("3. Quit")
 
-
-while True:
-    print_menu()
-    opt = int(input("Please enter an option: "))
+def main():
     store = ""
-    if opt == 1:
-        password = input("Please enter your password to encode: ")
-        store = encoder(password)
-        print("Your password has been encoded and stored! ")
-    elif opt == 2:
-        print(f'The encoded password is {store}, and the original password is {decoder(store)}')
-    elif opt == 3:
-        break
+    while True:
+        print_menu()
+        opt = int(input("Please enter an option: "))
+
+        if opt == 1:
+            password = input("Please enter your password to encode: ")
+            store = encoder(password)
+            print("Your password has been encoded and stored! ")
+        elif opt == 2:
+            print(f'The encoded password is {store}, and the original password is {decoder(store)}')
+            store = ""
+        elif opt == 3:
+            break
+
+if __name__ == "__main__":
+    main()
+
